@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sukesh S — Financial Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #0D2340;
+    --blue:    #1A4A8A;
+    --accent:  #2E75B6;
+    --light:   #EBF3FB;
+    --mid:     #B5D4F4;
+    --gold:    #BA7517;
+    --gold-lt: #FAEEDA;
+    --white:   #FFFFFF;
+    --off:     #F7F9FC;
+    --text:    #1A1A2E;
+    --muted:   #5A6B82;
+    --border:  #D0DFF0;
+    --radius:  12px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ── NAV ─────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,35,64,0.97);
+    backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 64px;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px; color: var(--white); letter-spacing: 0.5px;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75); text-decoration: none;
+    font-size: 14px; font-weight: 400; letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--mid); }
+
+  /* ── HERO ────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex; align-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(46,117,182,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -100px; left: 10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(46,117,182,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(46,117,182,0.25);
+    border: 1px solid rgba(46,117,182,0.5);
+    color: var(--mid);
+    font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 50px; margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    color: var(--white); line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--mid); }
+  .hero-sub {
+    font-size: 18px; color: rgba(255,255,255,0.65);
+    max-width: 580px; margin-bottom: 2.5rem; font-weight: 300;
+  }
+  .hero-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 3rem; }
+  .pill {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.85);
+    font-size: 13px; padding: 6px 16px; border-radius: 50px;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: var(--white);
+    padding: 13px 28px; border-radius: 8px;
+    font-size: 15px; font-weight: 500; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #1A4A8A; transform: translateY(-1px); }
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.85);
+    padding: 13px 28px; border-radius: 8px;
+    font-size: 15px; font-weight: 400; text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--mid); background: rgba(46,117,182,0.15); }
+
+  .hero-stats {
+    margin-top: 5rem;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .stat {
+    background: rgba(255,255,255,0.04);
+    padding: 1.5rem 1.25rem; text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem; color: var(--mid); display: block; line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 6px; letter-spacing: 0.3px; }
+
+  /* ── SECTIONS ────────────────────────── */
+  section { padding: 6rem 3rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--navy); margin-bottom: 3rem; line-height: 1.2;
+  }
+
+  /* ── ABOUT ───────────────────────────── */
+  .about { background: var(--off); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 16px; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .about-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem;
+  }
+  .about-card-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--light); display: flex; align-items: center;
+    justify-content: center; margin-bottom: 0.75rem;
+  }
+  .about-card-icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
+  .about-card h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .about-card p { font-size: 13px; color: var(--muted); }
+
+  /* ── SKILLS ──────────────────────────── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
+  .skill-cat {
+    background: var(--off);
+    border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem;
+  }
+  .skill-cat-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    background: var(--light); color: var(--blue);
+    font-size: 12px; font-weight: 500; padding: 4px 10px;
+    border-radius: 50px; border: 1px solid var(--mid);
+  }
+
+  /* ── EXPERIENCE ──────────────────────── */
+  .experience { background: var(--off); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 18px; top: 8px; bottom: 0;
+    width: 2px; background: var(--border);
+  }
+  .exp-item { display: flex; gap: 2rem; margin-bottom: 3rem; position: relative; }
+  .exp-dot {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--white); border: 2px solid var(--accent);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 1;
+  }
+  .exp-dot span { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); display: block; }
+  .exp-dot.gold { border-color: var(--gold); }
+  .exp-dot.gold span { background: var(--gold); }
+  .exp-content {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem 1.75rem; flex: 1;
+  }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .exp-title { font-size: 16px; font-weight: 600; color: var(--navy); }
+  .exp-date { font-size: 12px; color: var(--muted); background: var(--off); padding: 3px 10px; border-radius: 50px; border: 1px solid var(--border); white-space: nowrap; }
+  .exp-company { font-size: 14px; color: var(--accent); font-weight: 500; margin-bottom: 1rem; }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 14px; color: var(--muted); padding: 4px 0 4px 16px;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+  }
+  .exp-tag {
+    display: inline-block; margin-top: 1rem;
+    background: var(--gold-lt); color: var(--gold);
+    font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 50px;
+  }
+
+  /* ── ACHIEVEMENTS ────────────────────── */
+  .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+  .ach-card {
+    background: var(--navy);
+    border-radius: var(--radius); padding: 1.75rem;
+    position: relative; overflow: hidden;
+  }
+  .ach-card::before {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 120px; height: 120px; border-radius: 50%;
+    background: rgba(46,117,182,0.2); pointer-events: none;
+  }
+  .ach-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem; color: var(--mid); line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .ach-label { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 500; margin-bottom: 0.4rem; }
+  .ach-sub { font-size: 13px; color: rgba(255,255,255,0.45); }
+
+  /* ── CERTIFICATIONS ──────────────────── */
+  .certs { background: var(--off); }
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+  .cert-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem 1.25rem; text-align: center;
+    text-decoration: none; transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .cert-card:hover { box-shadow: 0 4px 20px rgba(46,117,182,0.15); transform: translateY(-2px); }
+  .cert-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--light); margin: 0 auto 1rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .cert-name { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .cert-issuer { font-size: 12px; color: var(--muted); }
+
+  /* ── EDUCATION ───────────────────────── */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .edu-card {
+    background: var(--off); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.75rem;
+  }
+  .edu-degree { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .edu-school { font-size: 14px; color: var(--accent); margin-bottom: 4px; }
+  .edu-year { font-size: 13px; color: var(--muted); }
+  .edu-badge {
+    display: inline-block; margin-top: 0.75rem;
+    background: var(--light); color: var(--blue);
+    font-size: 11px; font-weight: 600; padding: 3px 10px;
+    border-radius: 50px; border: 1px solid var(--mid); letter-spacing: 0.5px;
+  }
+
+  /* ── CONTACT ─────────────────────────── */
+  .contact { background: var(--navy); color: var(--white); }
+  .contact .section-title { color: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .contact-text p { color: rgba(255,255,255,0.6); font-size: 16px; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    color: rgba(255,255,255,0.8); text-decoration: none;
+    font-size: 15px; padding: 1rem 1.25rem;
+    background: rgba(255,255,255,0.06); border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .contact-link:hover { background: rgba(46,117,182,0.25); border-color: rgba(46,117,182,0.5); }
+  .contact-link-icon {
+    width: 36px; height: 36px; background: rgba(46,117,182,0.3);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-link-icon svg { width: 17px; height: 17px; stroke: var(--mid); fill: none; stroke-width: 1.8; }
+
+  /* ── FOOTER ──────────────────────────── */
+  footer {
+    background: #07172A; color: rgba(255,255,255,0.35);
+    text-align: center; padding: 2rem; font-size: 13px;
+  }
+
+  /* ── GOOGLE SITES NOTE ───────────────── */
+  .sites-note {
+    background: #FFF8E8; border: 1px solid #F0C040;
+    border-radius: 10px; padding: 1rem 1.5rem;
+    font-size: 13px; color: #6B4F00; margin-bottom: 2rem;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .sites-note strong { color: #4A3500; }
+</style>
+</head>
+<body>
+
+<!-- ── GOOGLE SITES BLUEPRINT NOTE ── -->
+<div style="background:#1A4A8A;color:#fff;font-size:13px;text-align:center;padding:10px;position:sticky;top:0;z-index:999;">
+  📋 <strong>Google Sites Blueprint</strong> — This is your design reference. Recreate each section in Google Sites using this as a visual guide.
+</div>
+
+<!-- ── NAV ── -->
+<nav>
+  <span class="nav-logo">Sukesh S</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-tag">Open to Opportunities · Chennai & Bengaluru</div>
+    <h1>Financial<br><em>Data Analyst</em></h1>
+    <p class="hero-sub">10 years turning complex financial data into decisions that matter — with Power BI, Python, SQL, and deep P2P/O2C/R2R domain expertise.</p>
+    <div class="hero-pills">
+      <span class="pill">Power BI & DAX</span>
+      <span class="pill">Advanced Excel / VBA</span>
+      <span class="pill">Python</span>
+      <span class="pill">SQL</span>
+      <span class="pill">Finance Operations</span>
+      <span class="pill">SAP S/4HANA</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get in touch</a>
+      <a href="#experience" class="btn-outline">View experience</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">10</span>
+        <div class="stat-label">Years experience</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">16</span>
+        <div class="stat-label">Power BI dashboards</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">240</span>
+        <div class="stat-label">Hours/month saved</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">73</span>
+        <div class="stat-label">Excel macros built</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="section-label">About me</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2 class="section-title">Where finance meets data</h2>
+        <p>I'm a Financial Data Analyst based in Chennai with a decade of experience bridging the gap between complex finance operations and actionable business intelligence.</p>
+        <p>I've worked across <strong>Capgemini, KOCH, IBM, Accenture, and Wipro</strong> — building dashboards, automating workflows, and helping leadership teams make faster, smarter decisions.</p>
+        <p>My edge is the combination of deep <strong>P2P / O2C / R2R domain knowledge</strong> with hands-on technical skills in Power BI, Python, and VBA — I can speak both the language of finance and the language of data.</p>
+        <p>Currently completing an <strong>MBA in Data Science</strong> at MAHE Manipal University (graduating 2026).</p>
+      </div>
+      <div class="about-cards">
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <h4>Dashboard Design</h4>
+          <p>16 Power BI dashboards in production across Premium workspaces</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h4>Process Automation</h4>
+          <p>73 VBA macros + Python scripts + Power Automate flows</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4>Finance Domain</h4>
+          <p>Deep P2P, O2C, R2R expertise across global enterprise clients</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h4>Team Leadership</h4>
+          <p>Leading cross-functional teams, training in AI & GenAI practices</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Capabilities</div>
+    <h2 class="section-title">Core skills</h2>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <div class="skill-cat-label">BI & Visualisation</div>
+        <div class="skill-tags">
+          <span class="tag">Power BI</span><span class="tag">DAX</span>
+          <span class="tag">Power Query</span><span class="tag">Excel Dashboards</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">Data & Automation</div>
+        <div class="skill-tags">
+          <span class="tag">Advanced Excel</span><span class="tag">VBA / Macros</span>
+          <span class="tag">Python</span><span class="tag">SQL / SSMS</span>
+          <span class="tag">Power Automate</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">Finance Domain</div>
+        <div class="skill-tags">
+          <span class="tag">P2P (AP)</span><span class="tag">O2C (AR)</span>
+          <span class="tag">R2R</span><span class="tag">SOX Compliance</span>
+          <span class="tag">Financial Reporting</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">ERP & Platforms</div>
+        <div class="skill-tags">
+          <span class="tag">SAP S/4HANA</span><span class="tag">SAP Ariba</span>
+          <span class="tag">Coupa</span><span class="tag">ServiceNow</span>
+          <span class="tag">MS Copilot</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">Leadership & Process</div>
+        <div class="skill-tags">
+          <span class="tag">Process Transition</span><span class="tag">SOP Documentation</span>
+          <span class="tag">Stakeholder Mgmt</span><span class="tag">Agile</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section class="experience" id="experience">
+  <div class="section-inner">
+    <div class="section-label">Career timeline</div>
+    <h2 class="section-title">Work experience</h2>
+    <div class="timeline">
+
+      <div class="exp-item">
+        <div class="exp-dot gold"><span></span></div>
+        <div class="exp-content">
+          <div class="exp-header">
+            <span class="exp-title">Team Lead – Financial Analytics</span>
+            <span class="exp-date">Sep 2025 – Present</span>
+          </div>
+          <div class="exp-company">Capgemini · Chennai</div>
+          <ul class="exp-bullets">
+            <li>Built 16 Power BI Premium dashboards — saving 240 hrs/month (1.38 FTE equivalent)</li>
+            <li>Developed 73 Excel VBA macros for automated data cleaning, KPI calc & bulk email</li>
+            <li>Built 3 Python scripts to extract financial PDF data and auto-generate visual reports</li>
+            <li>Deployed 2 Power Automate flows for web scraping and attachment processing</li>
+            <li>Designed custom Microsoft Copilot agents to handle common AP helpdesk queries</li>
+            <li>Transitioned 6 pilot processes end-to-end with full SOP documentation</li>
+          </ul>
+          <span class="exp-tag">🏆 2× Financial Recognition · 2× Townhall Recognition</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"><span></span></div>
+        <div class="exp-content">
+          <div class="exp-header">
+            <span class="exp-title">AP Helpdesk Lead – Data & Analytics</span>
+            <span class="exp-date">Mar 2023 – Aug 2025</span>
+          </div>
+          <div class="exp-company">KOCH Business Solutions · Bengaluru</div>
+          <ul class="exp-bullets">
+            <li>Integrated Coupa, ServiceNow, SAP Ariba, SSMS & SAP S/4HANA into unified Power BI dashboards</li>
+            <li>Achieved 20% efficiency improvement across P2P, O2C, and R2R teams via automated analytics</li>
+            <li>Drove stakeholder adoption of insight-driven dashboards replacing static weekly reports</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"><span></span></div>
+        <div class="exp-content">
+          <div class="exp-header">
+            <span class="exp-title">Business Delivery Specialist – BI & Reporting</span>
+            <span class="exp-date">May 2021 – Mar 2023</span>
+          </div>
+          <div class="exp-company">IBM · Bengaluru</div>
+          <ul class="exp-bullets">
+            <li>Built Corporate Performance Management dashboards integrating 8+ departmental data sources</li>
+            <li>Saved 25 hrs/month by automating P2P reconciliation workflows using Excel VBA</li>
+            <li>Provided Senior Leadership Team a single source of truth for project status tracking</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"><span></span></div>
+        <div class="exp-content">
+          <div class="exp-header">
+            <span class="exp-title">Business Process Delivery Associate – AP/AR</span>
+            <span class="exp-date">Oct 2019 – Apr 2021</span>
+          </div>
+          <div class="exp-company">Accenture · Chennai</div>
+          <ul class="exp-bullets">
+            <li>Managed end-to-end pilot transition of AP and AR reporting processes</li>
+            <li>Resolved overdue invoice issues using root-cause data analytics with SME collaboration</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"><span></span></div>
+        <div class="exp-content">
+          <div class="exp-header">
+            <span class="exp-title">Finance & Accounts Officer</span>
+            <span class="exp-date">Nov 2016 – Sep 2019</span>
+          </div>
+          <div class="exp-company">Wipro · Chennai</div>
+          <ul class="exp-bullets">
+            <li>Led AP operations — vendor invoice reconciliation, payment processing, and cash flow management</li>
+            <li>Introduced early automation in data entry and reporting, building the foundation for analytics work</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── ACHIEVEMENTS ── -->
+<section id="achievements">
+  <div class="section-inner">
+    <div class="section-label">Impact numbers</div>
+    <h2 class="section-title">Key achievements</h2>
+    <div class="achievements-grid">
+      <div class="ach-card">
+        <div class="ach-num">240</div>
+        <div class="ach-label">Hours/month saved</div>
+        <div class="ach-sub">16 Power BI dashboards in Capgemini Premium workspace</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">20%</div>
+        <div class="ach-label">Efficiency improvement</div>
+        <div class="ach-sub">Across P2P/O2C/R2R workflows at KOCH via automated analytics</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">73</div>
+        <div class="ach-label">Excel macros built</div>
+        <div class="ach-sub">Data cleaning, KPI computation, and bulk email automation</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">25 hrs</div>
+        <div class="ach-label">Saved per month at IBM</div>
+        <div class="ach-sub">Automated CPM reporting across 8+ departmental systems</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">6</div>
+        <div class="ach-label">Processes transitioned</div>
+        <div class="ach-sub">End-to-end with full SOP documentation at Capgemini</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">4×</div>
+        <div class="ach-label">Formally recognised</div>
+        <div class="ach-sub">2× financial + 2× townhall recognition for innovation & AI enablement</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CERTIFICATIONS ── -->
+<section class="certs" id="certifications">
+  <div class="section-inner">
+    <div class="section-label">Credentials</div>
+    <h2 class="section-title">Certifications</h2>
+    <div class="certs-grid">
+      <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/0SVD3247C3G3" target="_blank" class="cert-card">
+        <div class="cert-icon">📊</div>
+        <div class="cert-name">Microsoft Power BI</div>
+        <div class="cert-issuer">Microsoft / Coursera</div>
+      </a>
+      <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/44BDXR6MX2M2" target="_blank" class="cert-card">
+        <div class="cert-icon">📈</div>
+        <div class="cert-name">Google Data Analytics</div>
+        <div class="cert-issuer">Google / Coursera</div>
+      </a>
+      <a href="https://www.coursera.org/account/accomplishments/certificate/BFADVBSN0N6P" target="_blank" class="cert-card">
+        <div class="cert-icon">📋</div>
+        <div class="cert-name">Excel for Business (AI)</div>
+        <div class="cert-issuer">Coursera</div>
+      </a>
+      <a href="https://www.kaggle.com/learn/certification/sukeshkutty/python" target="_blank" class="cert-card">
+        <div class="cert-icon">🐍</div>
+        <div class="cert-name">Python</div>
+        <div class="cert-issuer">Kaggle</div>
+      </a>
+      <a href="https://www.credly.com/badges/82716636-2059-4c76-abd9-7080987bd9be/public_url" target="_blank" class="cert-card">
+        <div class="cert-icon">💰</div>
+        <div class="cert-name">Finance & Accounting</div>
+        <div class="cert-issuer">Credly</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── EDUCATION ── -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">Academic background</div>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-degree">MBA in Data Science</div>
+        <div class="edu-school">MAHE Manipal University Online</div>
+        <div class="edu-year">Jun 2024 – Mar 2026</div>
+        <span class="edu-badge">IN PROGRESS</span>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">B.Com (Professional Accounting)</div>
+        <div class="edu-school">Bharathiyar University — AJK College, Coimbatore</div>
+        <div class="edu-year">Sep 2013 – Jun 2016</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-text">
+        <div class="section-label" style="color:var(--mid)">Let's connect</div>
+        <h2 class="section-title">Open to Financial Data Analyst roles in Chennai & Bengaluru</h2>
+        <p>Whether you have a role in mind or just want to talk data and dashboards — I'm always happy to connect.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:sukeshkutti1@gmail.com" class="contact-link">
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          sukeshkutti1@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/sukesh-kutti" target="_blank" class="contact-link">
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          linkedin.com/in/sukesh-kutti
+        </a>
+        <a href="https://github.com/Sukeshkutti" target="_blank" class="contact-link">
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </div>
+          github.com/Sukeshkutti
+        </a>
+        <a href="tel:+917012473089" class="contact-link">
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.13 6.13l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          +91 70124 73089
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2026 Sukesh S · Financial Data Analyst · Chennai, Tamil Nadu</p>
+</footer>
+
+</body>
+</html>
